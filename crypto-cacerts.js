@@ -42,11 +42,15 @@ var parsePEMDirectory = function(dirname){
 }
 
 var createCredentials = function(options, context) {
-    if(options.ca){
-        options.ca = options.ca.concat(cacerts);
-    }
-    else{
-        options.ca = cacerts;
+    if(options){
+        if(options.ca){
+            options.ca = options.ca.concat(cacerts);
+        }
+        else{
+            options.ca = cacerts;
+        }
+    }else{
+        options = {'ca': cacerts};
     }
     return crypto.createCredentialsOriginal(options, context);
 }
